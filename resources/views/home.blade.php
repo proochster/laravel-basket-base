@@ -10,15 +10,6 @@
 
     <h1 class="title is-4">Latest offers</h1>
 
-    <div id="app">
-        <test-component>asdasd</test-component>
-        <div class="columns">
-            <div class="column is-half">
 
-                
-
-            </div>
-        </div>
-    </div>
 
 @endsection

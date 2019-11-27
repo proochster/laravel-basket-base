@@ -15,6 +15,5 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/shop', function () {
-    return view('shop');
-});
+Route::get('/shop', 'ShopController@index')->name('shop.index');
+Route::get('/shop/{product}', 'ShopController@show')->name('shop.product');
