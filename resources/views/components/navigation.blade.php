@@ -4,19 +4,22 @@
             <a class="navbar-item" href="{{ url('/') }}">
                 <strong>{{ config('app.name', 'Laravel') }}</strong>
             </a>
-    
+{{--     
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-            </a>
+            </a> --}}
         </div>
     
         <div class="navbar-menu">
             <div class="navbar-start">
-            <a href="{{ url('/') }}" class="navbar-item">
-                Home
-            </a>
+                <a href="{{ url('/') }}" class="navbar-item" title="Home">
+                    Home
+                </a>
+                <a href="{{ url('/shop') }}" class="navbar-item" title="Shop">
+                    Shop
+                </a>
             </div>
     
             <div class="navbar-end">
