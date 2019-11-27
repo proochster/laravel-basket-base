@@ -8,7 +8,7 @@
         </div>
     @endif
 
-    <h1 class="title is-4">Latest offers</h1>
+    <h1 class="title is-4">Shop</h1>
 
     <div id="app">
         <test-component>asdasd</test-component>
