@@ -10,12 +10,12 @@
         </div>
     @endif
 
-    <h1 class="title is-4">Shop</h1>
+    <h1 class="title is-1">Shop</h1>
 
     @foreach ($products->chunk(4) as $chunk)
-    <div class="columns is-desktop">
+    <div class="columns">
         @foreach ($chunk as $item)
-        <div class="column">
+        <div class="column is-half-tablet is-one-quarter-desktop">
             <div class="card">
                 <div class="card-image">
                     <figure class="image">
@@ -25,7 +25,7 @@
                     </figure>
                 </div>
                 <div class="card-content">
-                <h3 class="title is-4">{{ $item->name }}</h3>
+                <h2 class="title is-4">{{ $item->name }}</h2>
                     <div class="content">{{ $item->details }}</div>
                     <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $item->money_format($item->price) }}</span>
                     <div class="columns">

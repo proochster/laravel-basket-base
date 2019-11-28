@@ -14,42 +14,37 @@
     
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a href="{{ url('/') }}" class="navbar-item" title="Home">
-                    Home
-                </a>
                 <a href="{{ url('/shop') }}" class="navbar-item" title="Shop">
                     Shop
                 </a>
             </div>
     
             <div class="navbar-end">
-                <div class="navbar-item">
-                    @guest
-                        <div class="buttons">
-                            {{-- <a class="button is-primary is-outlined" href="{{ route('register') }}">Sign up</a>
-                            <a class="button is-primary is-outlined" href="{{ route('login') }}">Log in</a> --}}
+                @guest
+                    <a class="navbar-item" title="Sign up" href="{{-- route('register') --}}">Sign up</a>
+                    <a class="navbar-item" title="Log in" href="{{-- route('login') --}}">Log in</a>
+                @else
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <span class="navbar-item navbar-link">Options</span>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{-- route('dashboard') --}}">Dashboard</a>
+                            <a class="navbar-item" href="{{-- route('account') --}}">Account</a>
+                            <a class="navbar-item" href="{{-- route('logout') --}}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{-- {{ __('Logout') }} --}}
+                                Logout
+                            </a>
                         </div>
-                    @else
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <span class="navbar-item navbar-link">Options</span>
-                            <div class="navbar-dropdown">
-                                {{-- <a class="navbar-item" href="{{ route('dashboard') }}">Dashboard</a>
-                                <a class="navbar-item" href="{{ route('account') }}">Account</a>
-                                <a class="navbar-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a> --}}
-                            </div>
-                          </div>
-                        </div>
+                    </div>
 
-                        {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form> --}}
-                        
-                    @endguest
-                </div>
+                    <form id="logout-form" action="{{-- route('logout') --}}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    
+                @endguest
+                
+                <a class="navbar-item" title="Basket" href="{{ route('basket.index') }}">Basket</a>
             </div>
         </div>
     </div>

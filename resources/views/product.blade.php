@@ -21,7 +21,7 @@
     <div class="columns is-desktop">
         <div class="column">
             <figure class="image">
-                <img src="{{ asset('img/products/'.$product->slug.'.jpg')}}" alt="{{ $item->name }}">
+                <img src="{{ asset('img/products/'.$product->slug.'.jpg')}}" alt="{{ $product->name }}">
             </figure>
         </div>
         <div class="column">
@@ -36,7 +36,7 @@
                         <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $product->money_format($product->price) }}</span>
                     </div>
                     <div class="column">
-                        <button class="button is-info is-fullwidth">Add to basket</button>
+                        <a title="Add {{ $product->name}} to basket" href="{{ route('basket.index')}}" class="button is-info is-fullwidth">Add to basket</a>
                     </div>
                 </div>
             </div>            
