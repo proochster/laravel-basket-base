@@ -1,11 +1,13 @@
 @extends('layouts.base')
 
+@section('title', $product->name)
+
 @section('content')
 
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/shop">Shop</a></li>
+            <li><a href="{{ route('home')}}" title="{{ env('APP_NAME') }}">Home</a></li>
+            <li><a href="{{ route('shop.index')}}" title="Shop">Shop</a></li>
             <li class="is-active"><a href="#" aria-current="page">{{ $product->name }}</a></li>
         </ul>
     </nav>
@@ -18,8 +20,8 @@
 
     <div class="columns is-desktop">
         <div class="column">
-            <figure class="image is-4by3">
-                <img src="https://picsum.photos/800/600" alt="Placeholder image">
+            <figure class="image">
+                <img src="{{ asset('img/products/'.$product->slug.'.jpg')}}" alt="{{ $product->name }}">
             </figure>
         </div>
         <div class="column">
@@ -34,34 +36,11 @@
                         <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $product->money_format($product->price) }}</span>
                     </div>
                     <div class="column">
-                        <button class="button is-info is-fullwidth">Add to basket</button>
+                        <a title="Add {{ $product->name}} to basket" href="{{ route('basket.index')}}" class="button is-info is-fullwidth">Add to basket</a>
                     </div>
                 </div>
-            </div>
-            
+            </div>            
         </div>
-        {{-- @foreach ($chunk as $item)
-        <div class="column">
-            <div class="card">
-                <div class="card-image">
-                    
-                </div>
-                <div class="card-content">
-                <h3 class="title is-4">{{ $item->name }}</h3>
-                    <div class="content">{{ $item->details }}</div>
-                    <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $item->money_format($item->price) }}</span>
-                    <div class="columns">
-                        <div class="column">
-                            <button class="button is-info is-outlined is-fullwidth">View</button>
-                        </div>
-                        <div class="column">
-                            <button class="button is-info is-fullwidth">Add to basket</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach --}}
     </div>
 
 @endsection
