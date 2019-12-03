@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-image">
                     <figure class="image">
-                        <a href="{{ route('shop.product', $item->slug)}}" title="{{ $item->name }}">
+                        <a href="{{ route('shop.product', $item->slug)}}" title="{{ $item->name }}" id="{{ $item->slug }}">
                             <img src="{{ asset('img/products/'.$item->slug.'.jpg')}}" alt="{{ $item->name }}">
                         </a>
                     </figure>
@@ -34,7 +34,7 @@
                             <a title="View {{ $item->name }}" href="{{ route('shop.product', $item->slug)}}" class="button is-info is-outlined is-fullwidth">View</a>
                         </div>
                         <div class="column">
-                            <form action="{{ route('basket.add')}}" method="POST">
+                            <form action="{{ route('basket.add')}}#{{ $item->slug }}" method="POST">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="id" value="{{ $item->id }}">
                                     <input type="hidden" name="name" value="{{ $item->name }}">
