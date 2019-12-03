@@ -20,8 +20,8 @@ class BasketController extends Controller
 
         if(!\Cart::isEmpty()){
             
-            $cart = Cart::getContent();
-                        
+            $cart = Cart::getContent()->sort();
+                       
             $products = new Product;
             
             $basketProducts = $products->pickItems($cart);
@@ -96,9 +96,16 @@ class BasketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $product)
     {
-        //
+        Cart::update($product, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->quantity
+            ),
+        ));
+
+        return redirect()->back()->with('basket_updated', 'Basket updated');
     }
 
     /**
@@ -107,8 +114,10 @@ class BasketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($product)
     {
-        //
+        Cart::remove($product);
+
+        return redirect()->back()->with('item_removed', 'Item removed.');
     }
 }

@@ -12,16 +12,20 @@ class Product extends Model
 
     public function pickItems($cart){
 
-        return $cart = $cart->each(function ($item, $key) {
+        $cart = $cart->each(function ($item, $key) {
 
             $product = Product::where('id', $key)->first();
 
-            $item->put('slug', $product->slug);
-
             /*
-            * Get latest price form the Product Model rather than data submited in the basket form.
+            * Makes sure to get the latest price form the Product Model rather than data submited in the basket form.
             */
             $item->price = $product->price;
+
+            $item->slug = $product->slug;
+            $item->details = $product->details;
         });
+
+        return $cart;
+        // dd($cart);
     }
 }

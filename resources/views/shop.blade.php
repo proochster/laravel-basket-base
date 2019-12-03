@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <h1 class="title is-1">Shop</h1>
+    <h1 class="title is-3">Shop</h1>
 
     @foreach ($products->chunk(4) as $chunk)
     <div class="columns">

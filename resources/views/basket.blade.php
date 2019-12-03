@@ -17,10 +17,10 @@
         </div>
     @endif
 
-    <h1 class="title is-1">Your basket</h1>
+    <h1 class="title is-3">Your basket</h1>
 
     <div class="columns">
-        <div class="column is-half">
+        <div class="column is-half-tablet is-two-thirds-desktop">
         @if ($basket_empty ?? '')
 
             <article class="message" role="alert">
@@ -39,14 +39,7 @@
         @else    
 
             @foreach ($basket as $basketItem)
-                <ul>
-                    <li>id: {{$basketItem->id}}</li>
-                    <li>Name: {{$basketItem->name}}</li>
-                    <li>Qty: {{$basketItem->quantity}}</li>
-                    <li>Price: {{$basketItem->price}}</li>
-                    <li>Slug: {{$basketItem->slug}}</li>
-                </ul>
-                <hr>
+                @include('components.basketProduct')
             @endforeach
 
             <div class="columns">
@@ -60,9 +53,11 @@
 
         @endif
         </div>
-        <div class="column is-half">
+        <div class="column is-half-tablet is-one-third-desktop">
+            <div class="notification">
                 Number of items in the basket: {{ \Cart::getContent()->count() }}<br>
                 Total: {{ \Cart::getTotal() }}<br>
+            </div>
         </div>
     </div>
 
