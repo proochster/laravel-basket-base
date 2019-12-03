@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Darryldecode\Cart\Cart;
-
 use App\Product;
+use Cart;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
@@ -17,8 +16,25 @@ class BasketController extends Controller
     public function index()
     {
 
-        // return session()->all();
-        return view('basket');
+        $data = [];
+
+        if(!\Cart::isEmpty()){
+            
+            $cart = Cart::getContent();
+                        
+            $products = new Product;
+            
+            $basketProducts = $products->pickItems($cart);
+            
+            $data = [
+                'basket' => $basketProducts       
+            ];          
+        }
+        
+        $data = $data ?: ['basket_empty' => 'The basket is empty'];
+
+        return view('basket')->with($data);
+
     }
 
     /**
@@ -38,41 +54,15 @@ class BasketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // if( auth()->check() )
-        // {
-        //     $userId = auth()->user()->id;
-        // } else {
-        //     $userId = $request->session()->get('_token');     
-        // }
-            // dd($request->session()->get('_token'));
-    
-        // $product = Product::find($request->id);
-        // dd($product);
-        // \Cart::session($request->session()->get('_token'));
-        \Cart::add(array(
-                'id' => $request->id,
-                'name' => $request->name,
-                'price' => $request->price,
-                'quantity' => $request->quantity,
-                'attribures' => array()
-            ));
+    {              
 
-        // \Cart::associate($request->id, App\Product::class);
-        // $product = new Product();
-        // dd($request->session()->all());
-        // $cartItem::add(array(
-        //     'id' => $request->id,
-        //     'name' => $request->name,
-        //     'price' => $request->price,
-        //     'quantity' => $request->quantity,
-        //     'attribures' => array(),
-        //     'associatedModel' => 'Product'
-        // ));
-        // dd($cartItem);
-
-        // $cartItem = Cart::add('123abc', 'Product1', 1, 10.00);
-        // Cart:associate($cartItem->rowId, \App\Product::class); // Or just Cart:associate($cartItem->rowId, 'App\Product');
+        Cart::add(array(
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity
+            // 'attribures' => array()
+        ));
 
         return redirect()->back()->with('success_message', 'Added to the basket.');
     }
