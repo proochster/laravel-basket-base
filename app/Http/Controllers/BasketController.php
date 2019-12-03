@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use Cart;
 use Illuminate\Http\Request;
 
 class BasketController extends Controller
@@ -13,7 +15,26 @@ class BasketController extends Controller
      */
     public function index()
     {
-        return view('basket');
+
+        $data = [];
+
+        if(!\Cart::isEmpty()){
+            
+            $cart = Cart::getContent()->sort();
+                       
+            $products = new Product;
+            
+            $basketProducts = $products->pickItems($cart);
+            
+            $data = [
+                'basket' => $basketProducts       
+            ];          
+        }
+        
+        $data = $data ?: ['basket_empty' => 'The basket is empty'];
+
+        return view('basket')->with($data);
+
     }
 
     /**
@@ -33,8 +54,17 @@ class BasketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {              
+
+        Cart::add(array(
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity
+            // 'attribures' => array()
+        ));
+
+        return redirect()->back()->with('success_message', 'Added to the basket.');
     }
 
     /**
@@ -66,9 +96,16 @@ class BasketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $product)
     {
-        //
+        Cart::update($product, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->quantity
+            ),
+        ));
+
+        return redirect()->back()->with('basket_updated', 'Basket updated');
     }
 
     /**
@@ -77,8 +114,10 @@ class BasketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($product)
     {
-        //
+        Cart::remove($product);
+
+        return redirect()->back()->with('item_removed', 'Item removed.');
     }
 }
