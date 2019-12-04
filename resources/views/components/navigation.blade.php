@@ -44,7 +44,12 @@
                     
                 @endguest
                 
-                <a class="navbar-item" title="Basket" href="{{ route('basket.index') }}">Basket</a>
+                <a class="navbar-item" title="Basket" href="{{ route('basket.index') }}">
+                    <span>Basket</span>
+                    <span class="tags navbar-item">
+                        <span class="tag is-success is-rounded">{{ (!\Cart::isEmpty()) ? \Cart::getTotalQuantity() : '' }}</span>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
