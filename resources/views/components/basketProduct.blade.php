@@ -7,7 +7,7 @@
       <div class="content">
         <h5>{{ $basketItem->name }}</h5>
         <p>{{ $basketItem->details }}</p>
-        <p>{{ $basketItem->priceFormat }}</p>
+        <p class="has-text-danger">{{ $basketItem->priceFormat }}</p>
       </div>
     </div>
   </div>
