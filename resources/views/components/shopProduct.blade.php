@@ -7,14 +7,11 @@
         </figure>
     </div>
     <div class="card-content">
-    <h2 class="title is-4">{{ $item->name }}</h2>
+      <a href="{{ route('shop.product', $item->slug)}}" title="{{ $item->name }}" id="{{ $item->slug }}" class="has-text-black">  
+        <h2 class="title is-4">{{ $item->name }}</h2>
         <div class="content">{{ $item->details }}</div>
-        <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $item->money_format($item->price) }}</span>
-
-        <div class="columns">
-            <div class="column">
-                <a title="View {{ $item->name }}" href="{{ route('shop.product', $item->slug)}}" class="button is-info is-outlined is-fullwidth">View</a>
-            </div>
+      </a>
+        {{-- <div class="columns">
             <div class="column">
                 <form action="{{ route('basket.add')}}#{{ $item->slug }}" method="POST">
                         {{ csrf_field() }}
@@ -25,6 +22,14 @@
                         <button title="Add {{ $item->name}} to basket" type="submit" class="button is-info is-fullwidth">Add to basket</button>
                 </form>
             </div>
-        </div>
+        </div> --}}
     </div>
+    <footer class="card-footer">
+      <p class="card-footer-item has-text-danger">
+          {{ $item->money_format($item->price) }}
+      </p>
+      <p class="card-footer-item">
+         <a title="View {{ $item->name }}" href="{{ route('shop.product', $item->slug)}}" class="button is-info is-outlined is-fullwidth">View</a>
+      </p>
+    </footer>
 </div>

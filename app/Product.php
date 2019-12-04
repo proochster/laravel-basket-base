@@ -27,6 +27,5 @@ class Product extends Model
         });
 
         return $cart;
-        // dd($cart);
     }
 }

@@ -42,32 +42,30 @@
                 @include('components.basketProduct')
             @endforeach
 
+            <a title="Back to shop" href="{{ route('shop.index')}}" class=""><  Continue shopping</a>
             
-            @endif
+        @endif
         </div>
         <div class="column is-half-tablet is-one-third-desktop">
-            <article class="message">
-                <div class="message-header">
-                    <h3>Basket summary</h3>
-                </div>
-                <div class="message-body">
-                    Number of items in the basket: {{ \Cart::getContent()->count() }}<br>
-                    Total: {{ \Cart::getTotal() }}<br>
-                    Sub Total: {{ \Cart::getSubTotal() }}<br>
-                    Quantity: {{\Cart::getTotalQuantity()}}
-                </div>
-            </article>
-            <div class="columns">
-                <div class="column">
-                    <a title="Back to shop" href="{{ route('shop.index')}}" class="button is-outlined is-fullwidth">Continue shopping</a>
-                </div>
-                <div class="column">
-                    <a title="Checkout" class="button is-info is-fullwidth">Checkout</a>
-                </div>
-            </div>
-        </div>
 
-        
+            <article class="panel is-sticky">
+                <p class="panel-heading">
+                    Basket summary
+                </p>
+                <span class="panel-block">
+                    Number of items: <strong>{{\Cart::getTotalQuantity()}}</strong>
+                </span>
+                <span class="panel-block">
+                    Sub Total: <strong>{{ \Cart::getSubTotal() }}</strong>
+                </span>
+                <span class="panel-block">
+                    Total: <strong>{{ \Cart::getTotal() }}</strong>
+                </span>
+                <span class="panel-block">
+                    <a title="Checkout" class="button is-info is-fullwidth">Checkout</a>
+                </span>
+            </article>
+        </div>
     </div>
 
 @endsection
