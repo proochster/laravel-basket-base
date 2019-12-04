@@ -1,7 +1,9 @@
 <article class="product" id="{{ $basketItem->slug }}">
   <div class="columns is-mobile">
     <figure class="column is-one-quarter image">
-      <img src="{{ asset('img/products/'.$basketItem->slug.'.jpg')}}">
+      <a href="{{ route('shop.product', $basketItem->slug) }}" alt="{{ $basketItem->name }}">
+          <img src="{{ asset('img/products/'.$basketItem->slug.'.jpg')}}">
+      </a>
     </figure>
     <div class="column is-mobile is-three-quarters">
       <div class="content">
@@ -20,7 +22,7 @@
         </form>
     </div>
     <div class="level-right">
-    <form action="{{ route('basket.update', $basketItem->id) }}#{{ $basketItem->slug }}" method="POST" class="level-item">
+    <form action="{{ route('basket.update', $basketItem->id) }}#{{ $basketItem->slug }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
             
