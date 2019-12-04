@@ -7,6 +7,7 @@
       <div class="content">
         <h5>{{ $basketItem->name }}</h5>
         <p>{{ $basketItem->details }}</p>
+        <p>{{ $basketItem->priceFormat }}</p>
       </div>
     </div>
   </div>
@@ -18,14 +19,14 @@
             <button title="Remove {{ $basketItem->name }} from the basket" type="submit" class="button is-small">Remove</button>
         </form>
     </div>
-    <div class="level-right control">
+    <div class="level-right">
     <form action="{{ route('basket.update', $basketItem->id) }}#{{ $basketItem->slug }}" method="POST" class="level-item">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
             
             <div class="field has-addons">
               <div class="control">
-                <input name="quantity" type="number" class="input is-small is-inline has-text-right" value="{{ $basketItem->quantity }}">
+                <input name="quantity" type="number" class="input is-small is-inline has-text-right" value="{{ $basketItem->quantity }}" min="1">
               </div>
               <div class="control">
                   <button title="Update number of items" type="submit" class="button is-small is-outlined is-info">Update</button>
