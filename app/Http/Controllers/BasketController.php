@@ -56,10 +56,12 @@ class BasketController extends Controller
     public function store(Request $request)
     {              
 
+        $product = Product::where('id', $request->id)->first();
+
         Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
-            'price' => $request->price,
+            'price' => $product->price, // Fetch product price from the Product Model rather than user form submission.
             'quantity' => $request->quantity
             // 'attribures' => array()
         ));

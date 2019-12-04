@@ -25,12 +25,10 @@
             </figure>
         </div>
         <div class="column">
-            <h1 class="title is-1">{{ $product->name }}</h1>
+            <h1 class="title is-3">{{ $product->name }}</h1>
             <div class="container">
-                <div class="notification">
-                    <h2 class="subtitle">{{ $product->details }}</h2>
-                    <p>{{ $product->description }}</p>
-                </div>
+                <h2 class="subtitle">{{ $product->details }}</h2>
+                <p class="content">{{ $product->description }}</p>
                 @if (session()->has('success_message'))
                     <article class="message is-success" role="alert">
                         <div class="message-body">
@@ -49,18 +47,37 @@
                         </div>
                     </article>
                 @endif
-                <div class="columns">
-                    <div class="column">
-                        <span class="title has-text-weight-bold has-text-success has-text-right is-block">{{ $product->money_format($product->price) }}</span>
-                    </div>
-                    <div class="column">
-                        <form action="{{ route('basket.add')}}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="id" value="{{ $product->id }}">
-                                <input type="hidden" name="name" value="{{ $product->name }}">
-                                <input type="hidden" name="quantity" value="1">
-                                <input type="hidden" name="price" value="{{ $product->price }}">
-                                <button title="Add {{ $product->name}} to basket" type="submit" class="button is-info is-fullwidth">Add to basket</button>
+                <div class="level">
+                    <div class="level-item level-right">
+                        <form action="{{ route('basket.add')}}" method="POST" class="level is-mobile">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                            <input type="hidden" name="name" value="{{ $product->name }}">
+                            <input type="hidden" name="price" value="{{ $product->price }}">
+                            {{-- <div class="level-item">
+                                
+                            </div>
+                            <div class="level-item">
+                                
+                            </div> --}}
+
+                            <div class="field is-horizontal is-mobile">
+                                <div class="field-label is-normal">
+                                    <label class="has-text-danger">{{ $product->money_format($product->price) }}</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control">
+                                            <input name="quantity" type="number" class="input has-text-right" value="1" min="1">
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control">
+                                            <button title="Add {{ $product->name}} to basket" type="submit" class="button is-info is-fullwidth">Add to basket</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
